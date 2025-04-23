@@ -153,6 +153,7 @@ import {usePostStorage} from "@/piniaStorage/postStorage.js";
 import {jwtDecode} from "jwt-decode";
 import {useRoute} from "vue-router";
 import router from "@/router/index.js";
+import {useCommentStorage} from "@/piniaStorage/commentStorage.js";
 
 export default {
   setup()
@@ -173,21 +174,27 @@ export default {
     postDetailStorage.setNewPostData(pid);
     const postData = postDetailStorage.getPostData;
     const post = ref({
-      pid: postData.post.pid,
-      title: postData.post.title,
-      content: postData.post.content,
-      postDate: postData.post.postDate,
-      username: postData.post.username,
-      email: postData.post.email,
-      questionType: postData.post.questionType,
-      question: postData.post.question,
-      postViewCount: postData.post.postViewCount,
-      hotComments: postData.hotComments,
-      hotCommentsUpVote: postData.hotCommentsUpVoteCounter,
-      hotCommentsDownVote: postData.hotCommentsDownVoteCounter,
-      comments: postData.comments,
-      commentsUpVote: postData.commentsUpVoteCounter,
-      commentsDownVote: postData.commentsDownVoteCounter
+      pid: postData.pid,
+      title: postData.title,
+      content: postData.content,
+      postDate: postData.postDate,
+      username: postData.username,
+      email: postData.email,
+      questionType: postData.questionType,
+      question: postData.question,
+      postViewCount: postData.postViewCount,
+    })
+
+    const commentDetailStorage = useCommentStorage();
+    commentDetailStorage.setNewCommentData(pid);
+    const commentData = commentDetailStorage.getCommentData;
+    const comments = ref({
+      hotComments: commentData.hotComments,
+      hotCommentsUpVote: commentData.hotCommentsUpVoteCounter,
+      hotCommentsDownVote: commentData.hotCommentsDownVoteCounter,
+      comments: commentData.comments,
+      commentsUpVote: commentData.commentsUpVoteCounter,
+      commentsDownVote: commentData.commentsDownVoteCounter
     })
 
 
@@ -282,25 +289,30 @@ export default {
 
     async function getNewData() {
       await postDetailStorage.setNewPostData(pid);
+      await commentDetailStorage.setNewCommentData(pid);
       const postData = postDetailStorage.getPostData;
+      const commentData = commentDetailStorage.getCommentData;
 
       post.value = {
-        pid: postData.post.pid,
-        title: postData.post.title,
-        content: postData.post.content,
-        postDate: postData.post.postDate,
-        username: postData.post.username,
-        email: postData.post.email,
-        questionType: postData.post.questionType,
-        question: postData.post.question,
-        postViewCount: postData.post.postViewCount,
-        hotComments: postData.hotComments,
-        hotCommentsUpVote: postData.hotCommentsUpVoteCounter,
-        hotCommentsDownVote: postData.hotCommentsDownVoteCounter,
-        comments: postData.comments,
-        commentsUpVote: postData.commentsUpVoteCounter,
-        commentsDownVote: postData.commentsDownVoteCounter
+        pid: postData.pid,
+        title: postData.title,
+        content: postData.content,
+        postDate: postData.postDate,
+        username: postData.username,
+        email: postData.email,
+        questionType: postData.questionType,
+        question: postData.question,
+        postViewCount: postData.postViewCount,
       }
+    }
+
+    comments.value = {
+      hotComments: commentData.hotComments,
+      hotCommentsUpVote: commentData.hotCommentsUpVoteCounter,
+      hotCommentsDownVote: commentData.hotCommentsDownVoteCounter,
+      comments: commentData.comments,
+      commentsUpVote: commentData.commentsUpVoteCounter,
+      commentsDownVote: commentData.commentsDownVoteCounter
     }
 
     const submitComment = async () => {
@@ -323,7 +335,7 @@ export default {
 
     const upVoteComment = async (cId) => {
       try {
-        await api.post(`/community/board/post/${pid}/comment/${cId}/vote/up`);
+        await api.post(`/community/board/comment/${cId}/vote/up`);
         await getNewData();
 
         await router.push(`/board/post/${pid}`);
@@ -336,7 +348,7 @@ export default {
 
     const downVoteComment = async (cId) => {
       try {
-        await api.post(`/community/board/post/${pid}/comment/${cId}/vote/down`);
+        await api.post(`/community/board/comment/${cId}/vote/down`);
         await getNewData();
 
         await router.push(`/board/post/${pid}`);
@@ -386,9 +398,6 @@ export default {
       formatDate
     }
   }
-
-
-
 };
 </script>
 

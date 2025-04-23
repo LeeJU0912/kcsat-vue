@@ -205,9 +205,10 @@ export default {
 
     const postDetail = async (pid) => {
       try {
-        const response = await api.get(`/community/board/post/${pid}`);
-
-        postDetailStorage.setPostData(response.data);
+        const post_response = await api.get(`/community/board/post/${pid}`);
+        const comment_response = await api.get(`/api/community/board/post/${pid}/comment`);
+        postDetailStorage.setPostData(post_response.data);
+        postDetailStorage.setCommentData(comment_response.data);
 
         // 요청 성공 시 페이지 이동
         await router.replace({path: `/board/post/${pid}`});
