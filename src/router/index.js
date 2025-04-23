@@ -36,7 +36,7 @@ const routes = [
     { path: '/board/post/new', component: BoardPostForm, meta: { requiresAuth: true } },
     { path: '/board/post/:pId', component: BoardPostDetail, meta: { requiresAuth: true } },
     { path: '/board/post/:pId/update', component: BoardPostUpdate, meta: { requiresAuth: true } },
-    { path: '/board/post/myQuestions', component: BoardPostQuestionSelectForm, meta: { requiresAuth: true } },
+    { path: '/board/post/question', component: BoardPostQuestionSelectForm, meta: { requiresAuth: true } },
 
     { path: '/login', component: SignInForm },
     { path: '/signup', component: SignUpForm },

@@ -199,7 +199,7 @@ export default {
 
     const saveQuestion = async (qId) => {
       try {
-        await api.post(`/community/board/post/${qId}/save`);
+        await api.post(`/community/board/post/${qId}/question`);
         savedQuestion.value = true;
       } catch (error) {
         console.log(error);
@@ -215,7 +215,7 @@ export default {
         }
 
 
-        await api.delete(`/community/board/post/${pid}/remove`);
+        await api.delete(`/community/board/post/${pid}`);
 
         await router.push("/board");
 
@@ -226,7 +226,7 @@ export default {
 
     const upVotePost = async () => {
       try {
-        const response = await api.post(`/community/board/post/${pid}/postUpVote`);
+        const response = await api.post(`/community/board/post/${pid}/vote/up`);
         await getNewData();
 
         postUpVote.value = response.data;
@@ -240,7 +240,7 @@ export default {
 
     const downVotePost = async () => {
       try {
-        const response = await api.post(`/community/board/post/${pid}/postDownVote`);
+        const response = await api.post(`/community/board/post/${pid}/vote/down`);
         await getNewData();
 
         postDownVote.value = response.data;
@@ -254,7 +254,7 @@ export default {
 
     const getUpVotePost = async () => {
       try {
-        const response = await api.get(`/community/board/post/${pid}/postUpVote`);
+        const response = await api.get(`/community/board/post/${pid}/vote/up`);
         await getNewData();
 
         postUpVote.value = response.data;
@@ -268,7 +268,7 @@ export default {
 
     const getDownVotePost = async () => {
       try {
-        const response = await api.get(`/community/board/post/${pid}/postDownVote`);
+        const response = await api.get(`/community/board/post/${pid}/vote/down`);
         await getNewData();
 
         postDownVote.value = response.data;
@@ -323,7 +323,7 @@ export default {
 
     const upVoteComment = async (cId) => {
       try {
-        await api.post(`/community/board/post/${pid}/comment/${cId}/commentUpVote`);
+        await api.post(`/community/board/post/${pid}/comment/${cId}/vote/up`);
         await getNewData();
 
         await router.push(`/board/post/${pid}`);
@@ -336,7 +336,7 @@ export default {
 
     const downVoteComment = async (cId) => {
       try {
-        await api.post(`/community/board/post/${pid}/comment/${cId}/commentDownVote`);
+        await api.post(`/community/board/post/${pid}/comment/${cId}/vote/down`);
         await getNewData();
 
         await router.push(`/board/post/${pid}`);
@@ -348,7 +348,7 @@ export default {
 
     const deleteComment = async (cId) => {
       try {
-        await api.delete(`/community/board/post/${pid}/comment/${cId}/remove`);
+        await api.delete(`/community/board/comment/${cId}`);
 
         await getNewData();
 

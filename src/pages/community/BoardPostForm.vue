@@ -72,7 +72,7 @@ export default {
       console.log(data)
 
       try {
-        const response = await api.post("/community/board/post/new", data);
+        const response = await api.post("/community/board/post", data);
 
         postStorage.setPostData(response.data);
 
@@ -99,7 +99,7 @@ export default {
 
         // 요청 성공 시 페이지 이동
         await router.replace({
-          path: "/board/post/myQuestions",
+          path: "/board/post/question",
         })
       } catch (error) {
         console.log(error);

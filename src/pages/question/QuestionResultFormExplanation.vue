@@ -32,7 +32,7 @@
           <button class="btn btn-success" disabled>처리 완료!</button>
         </div>
         <div v-else>
-          <button type="button" class="btn btn-primary mx-1" style="background-color: #002c62; border-color: #002c62" @click="postQuestion('/community/question/save')">내 문제집 저장</button>
+          <button type="button" class="btn btn-primary mx-1" style="background-color: #002c62; border-color: #002c62" @click="postQuestion('/community/question')">내 문제집 저장</button>
           <button type="button" class="btn btn-danger" @click="postQuestion('/community/result/junk')">문제 신고하기</button>
         </div>
 

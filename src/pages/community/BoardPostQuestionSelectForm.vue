@@ -79,7 +79,7 @@ export default {
 
         // 요청 성공 시 페이지 이동
         await router.replace({
-          path: "/board/post/new",
+          path: "/board/post",
         })
       } catch (error) {
         console.error('Error fetching questions:', error);

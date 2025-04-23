@@ -52,7 +52,7 @@ export default {
           content: content.value,
           qid: postData.post.question === null ? null : postData.post.question.qid,
         }
-        const response = await api.put(`/community/board/post/${postData.post.pid}/update`, data);
+        const response = await api.put(`/community/board/post/${postData.post.pid}`, data);
 
         postDetailStorage.setPostData(response);
 
