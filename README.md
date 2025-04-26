@@ -8,4 +8,4 @@
 
 ---
 
-![hpclab-2024-capstone_resized.jpg](/src/constants/hpclab-2024-capstone_resized.jpg)
+![hpclab-2024-capstone_resized.jpg](/src/assets/hpclab-2024-capstone_resized.jpg)

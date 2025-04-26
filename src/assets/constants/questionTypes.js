@@ -1,0 +1,35 @@
+export const questionTypes = new Map([
+    ['PURPOSE', '글의 목적'],
+    ['MAIN_IDEA', '글의 요지'],
+    ['TITLE', '글의 제목 추론'],
+    ['TOPIC', '글의 주제'],
+    ['TARGET_UNMATCH', '대상 정보 불일치'],
+    ['FEELING_CHANGE', '화자 심경 변화'],
+    ['UNDERLINE', '밑줄 친 구문 의미'],
+    ['BLANK', '빈칸 추론'],
+    ['BLANK_AB', '빈칸 A,B 추론'],
+    ['INFO_MATCH', '안내문 일치'],
+    ['INFO_UNMATCH', '안내문 불일치'],
+    ['GRAMMAR', '어법'],
+    ['SUMMARIZE_AB', '요약문 A,B 추론'],
+    ['ORDERING', '이어질 글의 순서 배열'],
+    ['ARGUMENT', '필자가 주장하는 바'],
+]);
+
+export const questionTypesList = [
+    { key: "PURPOSE", value: "글의 목적" },
+    { key: "MAIN_IDEA", value: "글의 요지" },
+    { key: "TITLE", value: "글의 제목 추론" },
+    { key: "TOPIC", value: "글의 주제" },
+    { key: "TARGET_UNMATCH", value: "대상 정보 불일치" },
+    { key: "FEELING_CHANGE", value: "화자 심경 변화" },
+    { key: "UNDERLINE", value: "밑줄 친 구문 의미" },
+    { key: "BLANK", value: "빈칸 추론" },
+    { key: "BLANK_AB", value: "빈칸 A,B 추론" },
+    { key: "INFO_MATCH", value: "안내문 일치" },
+    { key: "INFO_UNMATCH", value: "안내문 불일치" },
+    { key: "GRAMMAR", value: "어법" },
+    { key: "SUMMARIZE_AB", value: "요약문 A,B 추론" },
+    { key: "ORDERING", value: "이어질 글의 순서 배열" },
+    { key: "ARGUMENT", value: "필자가 주장하는 바" }
+];

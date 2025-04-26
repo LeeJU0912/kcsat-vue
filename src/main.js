@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import i18n from './i18n';
-import api from './api';
+import i18n from './plugins/i18n.js';
+import api from './services/api.js';
 import './assets/style.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css'

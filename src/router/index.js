@@ -1,30 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { isTokenExpired } from '@/jwtUtils';
-import Home from '@/pages/Home.vue';
-import HomeCredit from "@/pages/HomeCredit.vue";
-import HomeUserRequest from "@/pages/HomeUserRequest.vue";
-import BoardMain from "@/pages/community/BoardMain.vue";
-import HotBoardMain from "@/pages/community/HotBoardMain.vue";
-import BoardPostDetail from "@/pages/community/BoardPostDetail.vue";
-import BoardPostUpdate from "@/pages/community/BoardPostUpdate.vue";
-import BoardPostForm from "@/pages/community/BoardPostForm.vue";
-import BoardPostQuestionSelectForm from "@/pages/community/BoardPostQuestionSelectForm.vue";
-import SignInForm from "@/pages/login/SignInForm.vue";
-import SignUpForm from "@/pages/login/SignUpForm.vue";
-import MyBook from "@/pages/myBook/MyBook.vue";
-import MyBookQuestionDetail from "@/pages/myBook/MyBookQuestionDetail.vue";
-import QuestionForm from "@/pages/question/QuestionForm.vue";
-import QuestionResultForm from "@/pages/question/QuestionResultForm.vue";
-import QuestionResultFormExplanation from "@/pages/question/QuestionResultFormExplanation.vue";
-import Ranking from "@/pages/questionRanking/Ranking.vue";
-import RankingQuestionDetail from "@/pages/questionRanking/RankingQuestionDetail.vue";
-import AdminMain from "@/pages/admin/AdminMain.vue";
-import AdminMemberRequests from "@/pages/admin/AdminMemberRequests.vue";
-import AdminMemberList from "@/pages/admin/AdminMemberList.vue";
-import AdminMemberDetail from "@/pages/admin/AdminMemberDetail.vue";
-import AdminMemberDetailPosts from "@/pages/admin/AdminMemberDetailPosts.vue";
-import AdminMemberDetailComments from "@/pages/admin/AdminMemberDetailComments.vue";
-import QuestionResultFormDemo from "@/pages/question/QuestionResultFormDemo.vue";
+import { isTokenExpired } from '@/utils/jwtUtils.js';
+import Home from '@/views/home/Home.vue';
+import HomeCredit from "@/views/home/HomeCredit.vue";
+import HomeUserRequest from "@/views/home/HomeUserRequest.vue";
+import BoardMain from "@/views/community/BoardMain.vue";
+import HotBoardMain from "@/views/community/HotBoardMain.vue";
+import BoardPostDetail from "@/views/community/BoardPostDetail.vue";
+import BoardPostUpdate from "@/views/community/BoardPostUpdate.vue";
+import BoardPostForm from "@/views/community/BoardPostForm.vue";
+import BoardPostQuestionSelectForm from "@/views/community/BoardPostQuestionSelectForm.vue";
+import SignIn from "@/views/auth/SignIn.vue";
+import SignUp from "@/views/auth/SignUp.vue";
+import MyBook from "@/views/myBook/MyBook.vue";
+import MyBookQuestionDetail from "@/views/myBook/MyBookQuestionDetail.vue";
+import QuestionForm from "@/views/question/QuestionForm.vue";
+import QuestionResultForm from "@/views/question/QuestionResultForm.vue";
+import QuestionResultFormExplanation from "@/views/question/QuestionResultFormExplanation.vue";
+import Ranking from "@/views/questionRanking/Ranking.vue";
+import RankingQuestionDetail from "@/views/questionRanking/RankingQuestionDetail.vue";
+import AdminMain from "@/views/admin/AdminMain.vue";
+import AdminMemberRequests from "@/views/admin/AdminMemberRequests.vue";
+import AdminMemberList from "@/views/admin/AdminMemberList.vue";
+import AdminMemberDetail from "@/views/admin/AdminMemberDetail.vue";
+import AdminMemberDetailPosts from "@/views/admin/AdminMemberDetailPosts.vue";
+import AdminMemberDetailComments from "@/views/admin/AdminMemberDetailComments.vue";
+import QuestionResultFormDemo from "@/views/question/QuestionResultFormDemo.vue";
 
 const routes = [
     { path: '/', component: Home },
@@ -38,8 +38,8 @@ const routes = [
     { path: '/board/post/:pId/update', component: BoardPostUpdate, meta: { requiresAuth: true } },
     { path: '/board/post/question', component: BoardPostQuestionSelectForm, meta: { requiresAuth: true } },
 
-    { path: '/login', component: SignInForm },
-    { path: '/signup', component: SignUpForm },
+    { path: '/signIn', component: SignIn },
+    { path: '/signUp', component: SignUp },
 
     { path: '/myBook', component: MyBook, meta: { requiresAuth: true } },
     { path: '/myBook/:qId', component: MyBookQuestionDetail, meta: { requiresAuth: true } },
@@ -47,7 +47,7 @@ const routes = [
     { path: '/question/demo/result', component: QuestionResultFormDemo },
     { path: '/question', component: QuestionForm, meta: { requiresAuth: true } },
     { path: '/question/result', component: QuestionResultForm, meta: { requiresAuth: true } },
-    { path: '/question/explanation/result', component: QuestionResultFormExplanation, meta: { requiresAuth: true } },
+    { path: '/explanation/result', component: QuestionResultFormExplanation, meta: { requiresAuth: true } },
 
     { path: '/weekly', component: Ranking },
     { path: '/weekly/:qId', component: RankingQuestionDetail, meta: { requiresAuth: true } },
@@ -75,7 +75,7 @@ router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth) {
         if (jwt === null || isTokenExpired(jwt)) {
             sessionStorage.removeItem('jwt');
-            next('/login'); // JWT가 없으면 메인 화면으로 이동
+            next('/auth'); // JWT가 없으면 메인 화면으로 이동
         }
         else {
             next();
